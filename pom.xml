@@ -11,6 +11,15 @@
     <modules>
         <module>chapter_01</module>
         <module>chapter_02</module>
+        <module>chapter_03</module>
+        <module>chapter_05</module>
+        <module>chapter_19</module>
+        <module>amqp</module>
+        <module>jms</module>
+        <module>jdbc</module>
+        <module>chapter_08</module>
+        <module>caching</module>
+        <module>thymeleaf</module>
     </modules>
 
     <properties>
@@ -43,6 +52,16 @@
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.github.stefanbirkner/system-rules -->
         <dependency>
@@ -50,6 +69,26 @@
             <artifactId>system-rules</artifactId>
             <version>1.16.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>2.1.5.RELEASE</version>
         </dependency>
 
     </dependencies>
