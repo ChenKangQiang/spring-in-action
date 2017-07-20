@@ -20,6 +20,30 @@
         <module>chapter_08</module>
         <module>caching</module>
         <module>thymeleaf</module>
+        <module>STOMP</module>
+        <module>STOMPUser</module>
+        <module>WebSocket</module>
+        <module>mongo</module>
+        <module>neo4j</module>
+        <module>redis</module>
+        <module>methodsecurity</module>
+        <module>jsp</module>
+        <module>hibernate4</module>
+        <module>jpa-hibernate</module>
+        <module>jpa-springdata</module>
+        <module>chapter_07</module>
+        <module>spitter-api-content-negotiation</module>
+        <module>spitter-api-message-converters</module>
+        <module>contacts</module>
+        <module>tiles</module>
+        <module>conditional</module>
+        <module>externals</module>
+        <module>profiles</module>
+        <module>scopedbeans</module>
+        <module>stereo-javaconfig</module>
+        <module>stereo-mixedconfig</module>
+        <module>stereo-xmlconfig</module>
+        <module>stereo-autoconfig</module>
     </modules>
 
     <properties>
@@ -61,6 +85,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>3.2.4.RELEASE</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.github.stefanbirkner/system-rules -->
