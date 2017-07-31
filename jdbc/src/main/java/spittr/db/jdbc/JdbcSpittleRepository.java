@@ -13,17 +13,20 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
+import org.springframework.stereotype.Repository;
 import spittr.db.SpittleRepository;
 import spittr.domain.Spitter;
 import spittr.domain.Spittle;
 
+@Repository
 public class JdbcSpittleRepository implements SpittleRepository {
 
 	private static final String SELECT_SPITTLE = "select sp.id, s.id as spitterId, s.username, s.password, s.fullname, s.email, s.updateByEmail, sp.message, sp.postedTime from Spittle sp, Spitter s where sp.spitter = s.id";
 	private static final String SELECT_SPITTLE_BY_ID = SELECT_SPITTLE + " and sp.id=?";
 	private static final String SELECT_SPITTLES_BY_SPITTER_ID = SELECT_SPITTLE + " and s.id=? order by sp.postedTime desc";
 	private static final String SELECT_RECENT_SPITTLES = SELECT_SPITTLE + " order by sp.postedTime desc limit ?";
-	
+
+	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	public JdbcSpittleRepository(JdbcTemplate jdbcTemplate) {
@@ -32,7 +35,7 @@ public class JdbcSpittleRepository implements SpittleRepository {
 
 	@SuppressWarnings("deprecation")
 	public long count() {
-		return jdbcTemplate.queryForLong("select count(id) from Spittle");
+		return jdbcTemplate.queryForObject("select count(id) from Spittle", java.lang.Long.class);
 	}
 
 	public List<Spittle> findRecent() {
@@ -86,7 +89,15 @@ public class JdbcSpittleRepository implements SpittleRepository {
 			String fullName = rs.getString("fullname");
 			String email = rs.getString("email");
 			boolean updateByEmail = rs.getBoolean("updateByEmail");
-			Spitter spitter = new Spitter(spitterId, username, password, fullName, email, updateByEmail);
+
+			Spitter spitter = new Spitter();
+			spitter.setId(id);
+			spitter.setUsername(username);
+			spitter.setPassword(password);
+			spitter.setFullName(fullName);
+			spitter.setEmail(email);
+			spitter.setUpdateByEmail(updateByEmail);
+
 			return new Spittle(id, spitter, message, postedTime);
 		}
 	}
