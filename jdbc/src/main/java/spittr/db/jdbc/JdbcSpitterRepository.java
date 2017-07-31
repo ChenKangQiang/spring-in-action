@@ -25,11 +25,17 @@ public class JdbcSpitterRepository implements SpitterRepository {
 		return jdbcTemplate.queryForObject("select count(id) from Spitter", Long.class);
 	}
 
+	/**
+	 * 插入数据或者更新数据
+	 * @param spitter
+	 * @return
+	 */
 	public Spitter save(Spitter spitter) {
 		Long id = spitter.getId();
 		if (id == null) {
 			long spitterId = insertSpitterAndReturnId(spitter);
-			return new Spitter(spitterId, spitter.getUsername(), spitter.getPassword(), spitter.getFullName(), spitter.getEmail(), spitter.isUpdateByEmail());
+			spitter.setId(spitterId);
+			return spitter;
 		} else {
 			jdbcTemplate.update("update Spitter set username=?, password=?, fullname=?, email=?, updateByEmail=? where id=?",					
 					spitter.getUsername(),
@@ -41,6 +47,7 @@ public class JdbcSpitterRepository implements SpitterRepository {
 		}
 		return spitter;
 	}
+
 
 	/**
 	 * Inserts a spitter using SimpleJdbcInsert. 
@@ -97,7 +104,15 @@ public class JdbcSpitterRepository implements SpitterRepository {
 			String fullName = rs.getString("fullname");
 			String email = rs.getString("email");
 			boolean updateByEmail = rs.getBoolean("updateByEmail");
-			return new Spitter(id, username, password, fullName, email, updateByEmail);
+
+			Spitter spitter = new Spitter();
+			spitter.setId(id);
+			spitter.setUsername(username);
+			spitter.setPassword(password);
+			spitter.setFullName(fullName);
+			spitter.setEmail(email);
+			spitter.setUpdateByEmail(updateByEmail);
+			return spitter;
 		}		
 	}
 
