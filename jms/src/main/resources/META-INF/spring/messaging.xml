@@ -1,75 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:jms="http://www.springframework.org/schema/jms"
-	xmlns:amq="http://activemq.apache.org/schema/core"
-	xmlns:c="http://www.springframework.org/schema/c"
-	xsi:schemaLocation="http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.2.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd
 		http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-<!--
-<bean id="connectionFactory"
-      class="org.apache.activemq.spring.ActiveMQConnectionFactory" />
+    <context:component-scan base-package="spittr.alerts" />
 
-<bean id="connectionFactory"
-      class="org.apache.activemq.spring.ActiveMQConnectionFactory"
-      p:brokerURL="tcp://localhost:61616" />
+    <!--
+    <bean id="connectionFactory"
+          class="org.apache.activemq.spring.ActiveMQConnectionFactory" />
 
-<amq:connectionFactory id="connectionFactory" />
+    <bean id="connectionFactory"
+          class="org.apache.activemq.spring.ActiveMQConnectionFactory"
+          p:brokerURL="tcp://localhost:61616" />
 
-<bean id="jmsTemplate" 
-      class="org.springframework.jms.core.JmsTemplate"
-      c:_-ref="connectionFactory" />
+    <amq:connectionFactory id="connectionFactory" />
 
-<bean id="spittleQueue" class="org.apache.activemq.command.ActiveMQQueue"
-      c:_="spittle.alert.queue" />
+    <bean id="jmsTemplate"
+          class="org.springframework.jms.core.JmsTemplate"
+          c:_-ref="connectionFactory" />
 
-<bean id="spittleTopic" class="org.apache.activemq.command.ActiveMQTopic"
-      c:_="spittle.alert.topic" />
+    <bean id="spittleQueue" class="org.apache.activemq.command.ActiveMQQueue"
+          c:_="spittle.alert.queue" />
 
-<bean id="jmsTemplate" 
-      class="org.springframework.jms.core.JmsTemplate"
-      c:_-ref="connectionFactory" 
-      p:defaultDestination-ref="queue"/>
+    <bean id="spittleTopic" class="org.apache.activemq.command.ActiveMQTopic"
+          c:_="spittle.alert.topic" />
 
-<bean id="messageConverter" 
-      class="org.springframework.jms.support.converter.MappingJacksonMessageConverter" p: />
+    <bean id="jmsTemplate"
+          class="org.springframework.jms.core.JmsTemplate"
+          c:_-ref="connectionFactory"
+          p:defaultDestination-ref="queue"/>
 
-<bean id="jmsTemplate" 
-      class="org.springframework.jms.core.JmsTemplate"
-      c:_-ref="connectionFactory" 
-      p:defaultDestinationName="spittle.alert.queue" 
-      p:messageConverter-ref="messageConverter" />
- -->
+    <bean id="messageConverter"
+          class="org.springframework.jms.support.converter.MappingJacksonMessageConverter" p: />
+
+    <bean id="jmsTemplate"
+          class="org.springframework.jms.core.JmsTemplate"
+          c:_-ref="connectionFactory"
+          p:defaultDestinationName="spittle.alert.queue"
+          p:messageConverter-ref="messageConverter" />
+     -->
 
 
-<!-- 配置消息目的地，可以是队列，也可以是主题 -->
-<amq:queue id="spittleQueue" physicalName="spittle.alert.queue" />
+    <!-- 配置消息目的地，可以是队列，也可以是主题 -->
+    <amq:queue id="spittleQueue" physicalName="spittle.alert.queue"/>
 
-<amq:topic id="spittleTopic" physicalName="spittle.alert.topic" />
+    <amq:topic id="spittleTopic" physicalName="spittle.alert.topic"/>
 
-<!-- 配置ActiveMQ的连接工厂 -->
-<amq:connectionFactory id="connectionFactory" 
-      brokerURL="tcp://localhost:61616" />
+    <!-- 配置ActiveMQ的连接工厂 -->
+    <amq:connectionFactory id="connectionFactory" brokerURL="tcp://localhost:61616"/>
 
-<!-- 配置JMS模板，JMS模板需使用连接工厂 -->
-<bean id="jmsTemplate" 
-      class="org.springframework.jms.core.JmsTemplate"
-      c:_-ref="connectionFactory" 
-      p:defaultDestinationName="spittle.alert.queue" />
+    <!-- 配置JMS模板，JMS模板需使用连接工厂 -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="defaultDestination" value="spittle.alert.queue"/>
+    </bean>
 
-<bean id="alertService" class="spittr.alerts.AlertServiceImpl"
-      c:_-ref="jmsTemplate" />
+    <!-- 配置消息监听容器，监控JMS目的地，并把消息传给任意一个对此感兴趣的消息监听者 -->
+    <jms:listener-container>
+        <jms:listener destination="spittle.alert.queue"
+                      ref="spittleHandler"
+                      method="handleSpittleAlert"/>
+    </jms:listener-container>
 
-<!-- 配置消息监听容器，监控JMS目的地，并把消息传给任意一个对此感兴趣的消息监听者 -->
-<jms:listener-container>
-  <jms:listener destination="spittle.alert.queue" 
-                ref="spittleHandler" 
-                method="handleSpittleAlert" />
-</jms:listener-container>
-
-<bean id="spittleHandler" class="spittr.alerts.SpittleAlertHandler" />
+    <bean id="spittleHandler" class="spittr.alerts.SpittleAlertHandler"/>
 
 </beans>

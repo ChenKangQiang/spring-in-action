@@ -1,7 +1,6 @@
 package spittr.message;
 
-import java.util.Date;
-
+import java.time.LocalDateTime;
 import org.junit.Ignore;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.context.ApplicationContext;
@@ -19,9 +18,12 @@ public class ProducerMain {
     
     for (int i=0; i < 20; i++) {
       System.out.println("Sending message #" + i);
-      Spittle spittle = new Spittle((long) i, null, "Hello world (" + i + ")", new Date());
+      Spittle spittle = new Spittle();
+      spittle.setId(new Long(i));
+      spittle.setMessage("Hello world (" + i + ")");
+      spittle.setPostedTime(LocalDateTime.now());
       template.convertAndSend(spittle);
-      Thread.sleep(5000);
+      Thread.sleep(2000);
     }
     
     System.out.println("Done!");

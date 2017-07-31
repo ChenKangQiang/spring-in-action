@@ -3,31 +3,29 @@ package spittr.alerts;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.stereotype.Service;
 import spittr.domain.Spittle;
 
+
+@Service
 public class AlertServiceImpl implements AlertService {
 
-  private RabbitTemplate rabbit;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
-  @Autowired
-  public AlertServiceImpl(RabbitTemplate rabbit) {
-    this.rabbit = rabbit;
-  }
-  
-  @Override
-  public void sendSpittleAlert(Spittle spittle) {
-    rabbit.convertAndSend("spittle.alert.exchange", 
-                          "spittle.alerts", 
-                          spittle);
-  }
+    @Override
+    public void sendSpittleAlert(Spittle spittle) {
+        rabbitTemplate.convertAndSend("spittle.alert.exchange",
+                "spittle.alerts",
+                spittle);
+    }
 
-	@Override
-	public Spittle retrieveSpittleAlert() {
-		// TODO Auto-generated method stub
-		Spittle spittle = (Spittle)rabbit.receiveAndConvert("spittle.alert.queue");
-		return spittle;
-	}
-  
-  
+    @Override
+    public Spittle retrieveSpittleAlert() {
+        // TODO Auto-generated method stub
+        Spittle spittle = (Spittle) rabbitTemplate.receiveAndConvert("spittle.alert.queue");
+        return spittle;
+    }
+
 
 }

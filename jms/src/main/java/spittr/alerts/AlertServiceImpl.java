@@ -1,7 +1,9 @@
 package spittr.alerts;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsOperations;
 
+import org.springframework.stereotype.Service;
 import spittr.domain.Spittle;
 
 /**
@@ -11,8 +13,10 @@ import spittr.domain.Spittle;
  *
  */
 
+@Service
 public class AlertServiceImpl implements AlertService {
 
+  @Autowired
   private JmsOperations jmsOperations;
 
   public AlertServiceImpl(JmsOperations jmsOperations) {
