@@ -1,5 +1,8 @@
 package sia.knights;
 
+import sia.knights.api.Knight;
+import sia.knights.api.Quest;
+
 public class BraveKnight implements Knight {
 
     private Quest quest;

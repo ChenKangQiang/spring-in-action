@@ -1,8 +1,7 @@
 package sia.knights;
 
 import org.junit.Test;
-import sia.knights.BraveKnight;
-import sia.knights.Quest;
+import sia.knights.api.Quest;
 
 import static org.mockito.Mockito.*;
 

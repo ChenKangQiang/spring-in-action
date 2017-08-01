@@ -2,10 +2,8 @@ package sia.knights;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import sia.knights.BraveKnight;
-import sia.knights.Knight;
-import sia.knights.Quest;
-import sia.knights.SlayDragonQuest;
+import sia.knights.api.Knight;
+import sia.knights.api.Quest;
 
 import java.io.PrintStream;
 
@@ -18,13 +16,9 @@ public class KnightConfig {
     }
 
     @Bean
-    public Quest quest() {
-        return new SlayDragonQuest(stream());
-    }
+    public Quest quest() { return new SlayDragonQuest(stream()); }
 
     @Bean
-    public PrintStream stream() {
-        return new FakePrintStream();
-    }
+    public PrintStream stream() { return new FakePrintStream(); }
 
 }

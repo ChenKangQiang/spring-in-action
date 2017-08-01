@@ -1,4 +1,4 @@
-package sia.knights;
+package sia.knights.api;
 
 public interface Knight {
 

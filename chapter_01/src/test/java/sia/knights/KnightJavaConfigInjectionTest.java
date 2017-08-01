@@ -7,19 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import sia.knights.Knight;
+import sia.knights.api.Knight;
 
-import static org.junit.Assert.assertEquals;
+import java.io.PrintStream;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = KnightConfig.class, loader = AnnotationConfigContextLoader.class)
 public class KnightJavaConfigInjectionTest {
 
     @Autowired
-    Knight knight;
+    private Knight knight;
 
     @Autowired
-    FakePrintStream printStream;
+    private PrintStream printStream;
 
     @After
     public void clearPrintStream() {

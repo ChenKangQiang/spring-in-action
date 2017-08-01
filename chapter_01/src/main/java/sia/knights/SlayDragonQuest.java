@@ -1,5 +1,7 @@
 package sia.knights;
 
+import sia.knights.api.Quest;
+
 import java.io.PrintStream;
 
 public class SlayDragonQuest implements Quest {

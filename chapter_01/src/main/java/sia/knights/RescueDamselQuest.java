@@ -1,5 +1,7 @@
 package sia.knights;
 
+import sia.knights.api.Quest;
+
 public class RescueDamselQuest implements Quest {
 
     public void embark() {
