@@ -14,18 +14,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration
 public class PNamespaceRefTest {
 
-  @Rule
-  public final StandardOutputStreamLog log = new StandardOutputStreamLog();
+    @Rule
+    public final StandardOutputStreamLog log = new StandardOutputStreamLog();
 
-  @Autowired
-  private MediaPlayer player;
+    @Autowired
+    private MediaPlayer player;
 
-  @Test
-  public void play() {
-    player.play();
-    assertEquals(
-        "Playing Sgt. Pepper's Lonely Hearts Club Band by The Beatles\n", 
-        log.getLog());
-  }
+    @Test
+    public void play() {
+        player.play();
+        assertEquals(
+                "Playing Sgt. Pepper's Lonely Hearts Club Band by The Beatles\n",
+                log.getLog());
+    }
 
 }

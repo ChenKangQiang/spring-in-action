@@ -21,48 +21,48 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 @ComponentScan("spittr.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-  @Bean
-  public ViewResolver viewResolver() {
-    InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-    resolver.setPrefix("/WEB-INF/views/");
-    resolver.setSuffix(".jsp");
-    return resolver;
-  }
-  
-  @Override
-  public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-    configurer.enable();
-  }
-
-  /*
-   * Configures content-negotiation.
-   */
-  @Configuration
-  public static class ContentNegotiationConfig extends WebMvcConfigurerAdapter {
-    
     @Bean
-    public ViewResolver cnViewResolver(ContentNegotiationManager cnm) {
-      ContentNegotiatingViewResolver cnvr =
-          new ContentNegotiatingViewResolver();
-      cnvr.setContentNegotiationManager(cnm);
-      return cnvr;
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".jsp");
+        return resolver;
     }
 
     @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-      configurer.defaultContentType(MediaType.TEXT_HTML);
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
-    
-    @Bean
-    public ViewResolver beanNameViewResolver() {
-       return new BeanNameViewResolver();
+
+    /*
+     * Configures content-negotiation.
+     */
+    @Configuration
+    public static class ContentNegotiationConfig extends WebMvcConfigurerAdapter {
+
+        @Bean
+        public ViewResolver cnViewResolver(ContentNegotiationManager cnm) {
+            ContentNegotiatingViewResolver cnvr =
+                    new ContentNegotiatingViewResolver();
+            cnvr.setContentNegotiationManager(cnm);
+            return cnvr;
+        }
+
+        @Override
+        public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+            configurer.defaultContentType(MediaType.TEXT_HTML);
+        }
+
+        @Bean
+        public ViewResolver beanNameViewResolver() {
+            return new BeanNameViewResolver();
+        }
+
+        @Bean
+        public View spittles() {
+            return new MappingJackson2JsonView();
+        }
+
     }
-    
-    @Bean
-    public View spittles() {
-      return new MappingJackson2JsonView();
-    }
-    
-  }
-  
+
 }

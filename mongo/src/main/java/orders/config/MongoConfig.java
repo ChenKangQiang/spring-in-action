@@ -11,14 +11,14 @@ import com.mongodb.MongoClient;
 @EnableMongoRepositories(basePackages = "orders.db")
 public class MongoConfig extends AbstractMongoConfiguration {
 
-	@Override
-	protected String getDatabaseName() {
-		return "OrdersDB";
-	}
-	
-	@Override
-	public Mongo mongo() throws Exception {
-		return new MongoClient();
-	}
+    @Override
+    protected String getDatabaseName() {
+        return "OrdersDB";
+    }
+
+    @Override
+    public Mongo mongo() throws Exception {
+        return new MongoClient();
+    }
 
 }

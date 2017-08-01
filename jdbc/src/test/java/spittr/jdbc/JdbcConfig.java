@@ -18,32 +18,32 @@ import spittr.db.jdbc.JdbcSpittleRepository;
 @Configuration
 public class JdbcConfig {
 
-  @Bean
-  public DataSource dataSource() {
-    return new EmbeddedDatabaseBuilder()
-      .setType(EmbeddedDatabaseType.H2)
-      .addScripts("classpath:spittr/db/jdbc/schema.sql", "classpath:spittr/db/jdbc/test-data.sql")
-      .build();
-  }
-  
-  @Bean
-  public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-    return new JdbcTemplate(dataSource);
-  }
-  
-  @Bean
-  public SpitterRepository spitterRepository(JdbcTemplate jdbcTemplate) {
-    return new JdbcSpitterRepository(jdbcTemplate);
-  }
+    @Bean
+    public DataSource dataSource() {
+        return new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2)
+                .addScripts("classpath:spittr/db/jdbc/schema.sql", "classpath:spittr/db/jdbc/test-data.sql")
+                .build();
+    }
 
-  @Bean
-  public SpittleRepository spittleRepository(JdbcTemplate jdbcTemplate) {
-    return new JdbcSpittleRepository(jdbcTemplate);
-  }
-  
-  @Bean
-  public PlatformTransactionManager transactionManager(DataSource dataSource) {
-    return new DataSourceTransactionManager(dataSource);
-  }
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    @Bean
+    public SpitterRepository spitterRepository(JdbcTemplate jdbcTemplate) {
+        return new JdbcSpitterRepository(jdbcTemplate);
+    }
+
+    @Bean
+    public SpittleRepository spittleRepository(JdbcTemplate jdbcTemplate) {
+        return new JdbcSpittleRepository(jdbcTemplate);
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
 
 }

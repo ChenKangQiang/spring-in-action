@@ -6,12 +6,12 @@ import spittr.Spittle;
 
 public interface SpittleRepository {
 
-  List<Spittle> findRecentSpittles();
+    List<Spittle> findRecentSpittles();
 
-  List<Spittle> findSpittles(long max, int count);
-  
-  Spittle findOne(long id);
+    List<Spittle> findSpittles(long max, int count);
 
-  Spittle save(Spittle spittle);
+    Spittle findOne(long id);
+
+    Spittle save(Spittle spittle);
 
 }

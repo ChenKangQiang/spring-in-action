@@ -15,20 +15,20 @@ import spittr.data.SpittleRepository;
 @RequestMapping("/spittlesx")
 public class SpittleApiController {
 
-  private static final String MAX_LONG_AS_STRING = "9223372036854775807";
+    private static final String MAX_LONG_AS_STRING = "9223372036854775807";
 
-  private SpittleRepository spittleRepository;
+    private SpittleRepository spittleRepository;
 
-  @Autowired
-  public SpittleApiController(SpittleRepository spittleRepository) {
-    this.spittleRepository = spittleRepository;
-  }
+    @Autowired
+    public SpittleApiController(SpittleRepository spittleRepository) {
+        this.spittleRepository = spittleRepository;
+    }
 
-  @RequestMapping(method=RequestMethod.GET)
-  public List<Spittle> spittles(
-      @RequestParam(value="max", defaultValue=MAX_LONG_AS_STRING) long max,
-      @RequestParam(value="count", defaultValue="20") int count) {
-    return spittleRepository.findSpittles(max, count);
-  }
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Spittle> spittles(
+            @RequestParam(value = "max", defaultValue = MAX_LONG_AS_STRING) long max,
+            @RequestParam(value = "count", defaultValue = "20") int count) {
+        return spittleRepository.findSpittles(max, count);
+    }
 
 }

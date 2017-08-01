@@ -23,47 +23,47 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @ComponentScan
 public class JpaConfig {
 
-  @Bean
-  public DataSource dataSource() {
-    EmbeddedDatabaseBuilder edb = new EmbeddedDatabaseBuilder();
-    edb.setType(EmbeddedDatabaseType.H2);
-    edb.addScript("spittr/db/jpa/schema.sql");
-    edb.addScript("spittr/db/jpa/test-data.sql");
-    EmbeddedDatabase embeddedDatabase = edb.build();
-    return embeddedDatabase;
-  }
+    @Bean
+    public DataSource dataSource() {
+        EmbeddedDatabaseBuilder edb = new EmbeddedDatabaseBuilder();
+        edb.setType(EmbeddedDatabaseType.H2);
+        edb.addScript("spittr/db/jpa/schema.sql");
+        edb.addScript("spittr/db/jpa/test-data.sql");
+        EmbeddedDatabase embeddedDatabase = edb.build();
+        return embeddedDatabase;
+    }
 
-  @Bean
-  public LocalContainerEntityManagerFactoryBean emf(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
-    LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-    emf.setDataSource(dataSource);
-    emf.setPersistenceUnitName("spittr");
-    emf.setJpaVendorAdapter(jpaVendorAdapter);
-    emf.setPackagesToScan("spittr.domain");
-    return emf;
-  }
-  
-  @Bean
-  public JpaVendorAdapter jpaVendorAdapter() {
-    HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-    adapter.setDatabase(Database.H2);
-    adapter.setShowSql(true);
-    adapter.setGenerateDdl(false);
-    adapter.setDatabasePlatform("org.hibernate.dialect.H2Dialect");
-    return adapter;
-  }
-  
+    @Bean
+    public LocalContainerEntityManagerFactoryBean emf(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
+        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+        emf.setDataSource(dataSource);
+        emf.setPersistenceUnitName("spittr");
+        emf.setJpaVendorAdapter(jpaVendorAdapter);
+        emf.setPackagesToScan("spittr.domain");
+        return emf;
+    }
 
-  @Configuration
-  @EnableTransactionManagement
-  public static class TransactionConfig implements TransactionManagementConfigurer {
-    @Inject
-    private EntityManagerFactory emf;
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter() {
+        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+        adapter.setDatabase(Database.H2);
+        adapter.setShowSql(true);
+        adapter.setGenerateDdl(false);
+        adapter.setDatabasePlatform("org.hibernate.dialect.H2Dialect");
+        return adapter;
+    }
 
-    public PlatformTransactionManager annotationDrivenTransactionManager() {
-      JpaTransactionManager transactionManager = new JpaTransactionManager();
-      transactionManager.setEntityManagerFactory(emf);
-      return transactionManager;
-    }    
-  }
+
+    @Configuration
+    @EnableTransactionManagement
+    public static class TransactionConfig implements TransactionManagementConfigurer {
+        @Inject
+        private EntityManagerFactory emf;
+
+        public PlatformTransactionManager annotationDrivenTransactionManager() {
+            JpaTransactionManager transactionManager = new JpaTransactionManager();
+            transactionManager.setEntityManagerFactory(emf);
+            return transactionManager;
+        }
+    }
 }

@@ -6,22 +6,23 @@ import spittr.domain.Spittle;
 
 /**
  * Repository interface with operations for {@link Spittle} persistence.
+ *
  * @author habuma
  */
 public interface SpittleRepository {
 
-  long count();
-  
-  List<Spittle> findRecent();
+    long count();
 
-  List<Spittle> findRecent(int count);
+    List<Spittle> findRecent();
 
-  Spittle findOne(long id);
+    List<Spittle> findRecent(int count);
 
-  Spittle save(Spittle spittle);
-    
-  List<Spittle> findBySpitterId(long spitterId);
-  
-  void delete(long id);
-    
+    Spittle findOne(long id);
+
+    Spittle save(Spittle spittle);
+
+    List<Spittle> findBySpitterId(long spitterId);
+
+    void delete(long id);
+
 }

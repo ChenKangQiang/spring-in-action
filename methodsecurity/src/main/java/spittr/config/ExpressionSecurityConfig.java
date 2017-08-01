@@ -10,19 +10,19 @@ import spittr.service.ExpressionSecuredSpittleService;
 import spittr.service.SpittleService;
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled=true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ExpressionSecurityConfig extends GlobalMethodSecurityConfiguration {
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth
-    .inMemoryAuthentication()
-      .withUser("user").password("password").roles("USER");
-  }
-  
-  @Bean
-  public SpittleService spitterService() {
-    return new ExpressionSecuredSpittleService();
-  }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .inMemoryAuthentication()
+                .withUser("user").password("password").roles("USER");
+    }
+
+    @Bean
+    public SpittleService spitterService() {
+        return new ExpressionSecuredSpittleService();
+    }
 
 }

@@ -10,8 +10,8 @@
 
     <rabbit:listener-container connection-factory="connectionFactory">
         <rabbit:listener ref="spittleListener"
-                  method="handleSpittleAlert"
-                  queues="spittleAlertQueue"/>
+                         method="handleSpittleAlert"
+                         queues="spittleAlertQueue"/>
     </rabbit:listener-container>
 
     <bean id="spittleListener" class="spittr.alerts.SpittleAlertHandler"/>

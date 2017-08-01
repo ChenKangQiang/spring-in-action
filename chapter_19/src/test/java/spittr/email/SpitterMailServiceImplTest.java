@@ -22,29 +22,29 @@ import spittr.domain.Spittle;
 import com.icegreen.greenmail.spring.GreenMailBean;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes=MailConfig.class)
+@ContextConfiguration(classes = MailConfig.class)
 public class SpitterMailServiceImplTest {
 
-  @Autowired
-  private SpitterMailService mailService;
+    @Autowired
+    private SpitterMailService mailService;
 
-  @Autowired
-  private GreenMailBean mailServer;
+    @Autowired
+    private GreenMailBean mailServer;
 
-  @Test
-  public void sendSimpleSpittleEmail() throws Exception {
-    Spitter spitter = new Spitter(1L, "habuma", null, "Craig Walls", "c@habuma.com", true);
-    Spittle spittle = new Spittle(1L, spitter, "Hiya!", new Date());
-    mailService.sendSimpleSpittleEmail("craig@habuma.com", spittle);
+    @Test
+    public void sendSimpleSpittleEmail() throws Exception {
+        Spitter spitter = new Spitter(1L, "habuma", null, "Craig Walls", "c@habuma.com", true);
+        Spittle spittle = new Spittle(1L, spitter, "Hiya!", new Date());
+        mailService.sendSimpleSpittleEmail("craig@habuma.com", spittle);
 
-    MimeMessage[] receivedMessages = mailServer.getReceivedMessages();
-    assertEquals(1,  receivedMessages.length);
-    assertEquals("New spittle from Craig Walls", receivedMessages[0].getSubject());
-    assertEquals("Craig Walls says: Hiya!", ((String) receivedMessages[0].getContent()).trim());
-    Address[] from = receivedMessages[0].getFrom();
-    assertEquals(1, from.length);
-    assertEquals("noreply@spitter.com", ((InternetAddress) from[0]).getAddress());
-    assertEquals("craig@habuma.com", ((InternetAddress) receivedMessages[0].getRecipients(RecipientType.TO)[0]).getAddress());
-  }
+        MimeMessage[] receivedMessages = mailServer.getReceivedMessages();
+        assertEquals(1, receivedMessages.length);
+        assertEquals("New spittle from Craig Walls", receivedMessages[0].getSubject());
+        assertEquals("Craig Walls says: Hiya!", ((String) receivedMessages[0].getContent()).trim());
+        Address[] from = receivedMessages[0].getFrom();
+        assertEquals(1, from.length);
+        assertEquals("noreply@spitter.com", ((InternetAddress) from[0]).getAddress());
+        assertEquals("craig@habuma.com", ((InternetAddress) receivedMessages[0].getRecipients(RecipientType.TO)[0]).getAddress());
+    }
 
 }

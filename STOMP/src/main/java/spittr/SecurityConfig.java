@@ -10,13 +10,13 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 @EnableWebMvcSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	public void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-			.inMemoryAuthentication()
-				.withUser("chuck").password("password").roles("USER")
-				.and()
-				.withUser("fred").password("password").roles("USER");
-	}
-	
+    @Autowired
+    public void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .inMemoryAuthentication()
+                .withUser("chuck").password("password").roles("USER")
+                .and()
+                .withUser("fred").password("password").roles("USER");
+    }
+
 }

@@ -11,13 +11,13 @@ import org.springframework.data.neo4j.config.Neo4jConfiguration;
 @EnableNeo4jRepositories(basePackages = "orders.db")
 public class Neo4jConfig extends Neo4jConfiguration {
 
-	public Neo4jConfig() {
-		setBasePackage("orders");
-	}
+    public Neo4jConfig() {
+        setBasePackage("orders");
+    }
 
-	@Bean(destroyMethod="shutdown")
-	public GraphDatabaseService graphDatabaseService() {	
-		return new GraphDatabaseFactory()
-				.newEmbeddedDatabase("/tmp/graphdb");
-	}
+    @Bean(destroyMethod = "shutdown")
+    public GraphDatabaseService graphDatabaseService() {
+        return new GraphDatabaseFactory()
+                .newEmbeddedDatabase("/tmp/graphdb");
+    }
 }

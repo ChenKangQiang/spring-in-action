@@ -4,73 +4,74 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Customer implements Serializable {
-  private Integer id;
-  private String name;
-  private String address;
-  private String city;
-  private String state;
-  private String zipCode;
-  private String phoneNumber;
-  
-  public Customer() {}
-  
-  public Customer(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
+    private Integer id;
+    private String name;
+    private String address;
+    private String city;
+    private String state;
+    private String zipCode;
+    private String phoneNumber;
 
-  public String getCity() {
-    return city;
-  }
+    public Customer() {
+    }
 
-  public void setCity(String city) {
-    this.city = city;
-  }
+    public Customer(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-  public Integer getId() {
-    return id;
-  }
+    public String getCity() {
+        return city;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public String getState() {
-    return state;
-  }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-  public void setState(String state) {
-    this.state = state;
-  }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-  public String getAddress() {
-    return address;
-  }
+    public String getState() {
+        return state;
+    }
 
-  public void setAddress(String address) {
-    this.address = address;
-  }
+    public void setState(String state) {
+        this.state = state;
+    }
 
-  public String getZipCode() {
-    return zipCode;
-  }
+    public String getAddress() {
+        return address;
+    }
 
-  public void setZipCode(String zipCode) {
-    this.zipCode = zipCode;
-  }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
 }

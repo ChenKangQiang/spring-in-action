@@ -9,16 +9,16 @@ import org.springframework.data.redis.core.RedisTemplate;
 @Configuration
 public class RedisConfig {
 
-	@Bean
-	public RedisConnectionFactory redisCF() {
-		return new JedisConnectionFactory();
-	}
-	
-	@Bean
-	public RedisTemplate<String, Product> redisTemplate(RedisConnectionFactory cf) {
-		RedisTemplate<String, Product> redis = new RedisTemplate<String, Product>();
-		redis.setConnectionFactory(cf);
-		return redis;
-	}
-	
+    @Bean
+    public RedisConnectionFactory redisCF() {
+        return new JedisConnectionFactory();
+    }
+
+    @Bean
+    public RedisTemplate<String, Product> redisTemplate(RedisConnectionFactory cf) {
+        RedisTemplate<String, Product> redis = new RedisTemplate<String, Product>();
+        redis.setConnectionFactory(cf);
+        return redis;
+    }
+
 }

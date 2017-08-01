@@ -19,37 +19,38 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 @ComponentScan("spittr.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-  @Bean
-  public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
-    ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-    viewResolver.setTemplateEngine(templateEngine);
-    return viewResolver;
-  }
-  @Bean
-  public SpringTemplateEngine templateEngine(TemplateResolver templateResolver) {
-    SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-    templateEngine.setTemplateResolver(templateResolver);
-    templateEngine.addDialect(new SpringSecurityDialect());
-    return templateEngine;
-  }
+    @Bean
+    public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine);
+        return viewResolver;
+    }
 
-  @Bean
-  public TemplateResolver templateResolver() {
-    TemplateResolver templateResolver = new ServletContextTemplateResolver();
-    templateResolver.setPrefix("/WEB-INF/views/");
-    templateResolver.setSuffix(".html");
-    templateResolver.setTemplateMode("HTML5");
-    return templateResolver;
-  }
-    
-  @Override
-  public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-    configurer.enable();
-  }
-  
-  @Override
-  public void addViewControllers(ViewControllerRegistry registry) {
-    registry.addViewController("/login").setViewName("login");
-  }
-  
+    @Bean
+    public SpringTemplateEngine templateEngine(TemplateResolver templateResolver) {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
+        templateEngine.addDialect(new SpringSecurityDialect());
+        return templateEngine;
+    }
+
+    @Bean
+    public TemplateResolver templateResolver() {
+        TemplateResolver templateResolver = new ServletContextTemplateResolver();
+        templateResolver.setPrefix("/WEB-INF/views/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML5");
+        return templateResolver;
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
+    }
+
 }

@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class AppWideExceptionHandler {
 
-  @ExceptionHandler(DuplicateSpittleException.class)
-  public String handleNotFound() {
-    return "error/duplicate";
-  }
+    @ExceptionHandler(DuplicateSpittleException.class)
+    public String handleNotFound() {
+        return "error/duplicate";
+    }
 
 }

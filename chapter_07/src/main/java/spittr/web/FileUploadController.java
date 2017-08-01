@@ -10,19 +10,19 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/fileupload")
 public class FileUploadController {
 
-  @RequestMapping(method=RequestMethod.GET)
-  public String uploadForm() {
-    return "uploadForm";
-  }
-  
-  @RequestMapping(method=RequestMethod.POST)
-  public String processUpload(@RequestPart("file") MultipartFile file) {
-  
-    System.out.println(file.getSize());
-    
+    @RequestMapping(method = RequestMethod.GET)
+    public String uploadForm() {
+        return "uploadForm";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String processUpload(@RequestPart("file") MultipartFile file) {
+
+        System.out.println(file.getSize());
+
 //    System.out.println("---->  " + file.getName() + "  ::  "  + file.getSize());
-    
-    return "redirect:/";
-  }
-  
+
+        return "redirect:/";
+    }
+
 }

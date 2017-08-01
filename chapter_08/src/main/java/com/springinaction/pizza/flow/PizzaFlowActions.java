@@ -18,42 +18,42 @@ import com.springinaction.pizza.service.CustomerService;
 
 @Component
 public class PizzaFlowActions {
-  private static final Logger LOGGER = LogManager.getLogger(PizzaFlowActions.class);
-  
-   public Customer lookupCustomer(String phoneNumber) 
-         throws CustomerNotFoundException {     
-      Customer customer = customerService.lookupCustomer(phoneNumber);
-      if(customer != null) {        
-        return customer;
-      } else {
-        throw new CustomerNotFoundException();
-      }
-   }
-   
-   public void addCustomer(Customer customer) {
-      LOGGER.warn("TODO: Flesh out the addCustomer() method.");
-   }
+    private static final Logger LOGGER = LogManager.getLogger(PizzaFlowActions.class);
 
-   public Payment verifyPayment(PaymentDetails paymentDetails) {
-     Payment payment = null;
-     if(paymentDetails.getPaymentType() == CREDIT_CARD) {
-       payment = new CreditCardPayment();
-     } else {
-       payment = new CashOrCheckPayment();
-     }
-     
-     return payment;
-   }
-   
-   public void saveOrder(Order order) {
-      LOGGER.warn("TODO: Flesh out the saveOrder() method.");
-   }
-   
-   public boolean checkDeliveryArea(String zipCode) {
-     LOGGER.warn("TODO: Flesh out the checkDeliveryArea() method.");
-     return "75075".equals(zipCode);
-   }
+    public Customer lookupCustomer(String phoneNumber)
+            throws CustomerNotFoundException {
+        Customer customer = customerService.lookupCustomer(phoneNumber);
+        if (customer != null) {
+            return customer;
+        } else {
+            throw new CustomerNotFoundException();
+        }
+    }
 
-   @Autowired
-   CustomerService customerService;
+    public void addCustomer(Customer customer) {
+        LOGGER.warn("TODO: Flesh out the addCustomer() method.");
+    }
+
+    public Payment verifyPayment(PaymentDetails paymentDetails) {
+        Payment payment = null;
+        if (paymentDetails.getPaymentType() == CREDIT_CARD) {
+            payment = new CreditCardPayment();
+        } else {
+            payment = new CashOrCheckPayment();
+        }
+
+        return payment;
+    }
+
+    public void saveOrder(Order order) {
+        LOGGER.warn("TODO: Flesh out the saveOrder() method.");
+    }
+
+    public boolean checkDeliveryArea(String zipCode) {
+        LOGGER.warn("TODO: Flesh out the checkDeliveryArea() method.");
+        return "75075".equals(zipCode);
+    }
+
+    @Autowired
+    CustomerService customerService;
 }

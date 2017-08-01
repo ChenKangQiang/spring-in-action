@@ -4,6 +4,6 @@ import spittr.domain.Spittle;
 
 public interface SpittleService {
 
-  public abstract void addSpittle(Spittle spittle);
+    public abstract void addSpittle(Spittle spittle);
 
 }

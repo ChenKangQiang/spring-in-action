@@ -12,26 +12,26 @@ import sia.knights.Knight;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes=KnightConfig.class,loader=AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = KnightConfig.class, loader = AnnotationConfigContextLoader.class)
 public class KnightJavaConfigInjectionTest {
 
-  @Autowired
-  Knight knight;
-  
-  @Autowired
-  FakePrintStream printStream;
+    @Autowired
+    Knight knight;
 
-  @After
-  public void clearPrintStream() {
-    printStream.clear();
-  }
+    @Autowired
+    FakePrintStream printStream;
 
-  @Test
-  public void shouldInjectKnightWithSlayDragonQuest() {
-    knight.embarkOnQuest();
-    assertEquals(
-        "Embarking on quest to slay the dragon!\n", 
-        printStream.getPrintedString());
-  }
+    @After
+    public void clearPrintStream() {
+        printStream.clear();
+    }
+
+    @Test
+    public void shouldInjectKnightWithSlayDragonQuest() {
+        knight.embarkOnQuest();
+        assertEquals(
+                "Embarking on quest to slay the dragon!\n",
+                printStream.getPrintedString());
+    }
 
 }

@@ -10,23 +10,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class SpittleFeedServiceImpl implements SpittleFeedService {
 
-	private SimpMessagingTemplate messaging;
-	private Pattern pattern = Pattern.compile("\\@(\\S+)");
-	
-	@Autowired
-	public SpittleFeedServiceImpl(SimpMessagingTemplate messaging) {
-		this.messaging = messaging;
-	}
-	
-	public void broadcastSpittle(Spittle spittle) {
-		messaging.convertAndSend("/topic/spittlefeed", spittle);
-		
-		Matcher matcher = pattern.matcher(spittle.getMessage());
-		if (matcher.find()) {
-			String username = matcher.group(1);
-			messaging.convertAndSendToUser(username, "/queue/notifications",
-					new Notification("You just got mentioned!"));
-		}
-	}
-	
+    private SimpMessagingTemplate messaging;
+    private Pattern pattern = Pattern.compile("\\@(\\S+)");
+
+    @Autowired
+    public SpittleFeedServiceImpl(SimpMessagingTemplate messaging) {
+        this.messaging = messaging;
+    }
+
+    public void broadcastSpittle(Spittle spittle) {
+        messaging.convertAndSend("/topic/spittlefeed", spittle);
+
+        Matcher matcher = pattern.matcher(spittle.getMessage());
+        if (matcher.find()) {
+            String username = matcher.group(1);
+            messaging.convertAndSendToUser(username, "/queue/notifications",
+                    new Notification("You just got mentioned!"));
+        }
+    }
+
 }

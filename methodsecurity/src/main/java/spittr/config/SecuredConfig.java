@@ -10,19 +10,19 @@ import spittr.service.SpittleService;
 import spittr.service.SecuredSpittleService;
 
 @Configuration
-@EnableGlobalMethodSecurity(securedEnabled=true)
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecuredConfig extends GlobalMethodSecurityConfiguration {
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth
-    .inMemoryAuthentication()
-      .withUser("user").password("password").roles("USER");
-  }
-  
-  @Bean
-  public SpittleService spitterService() {
-    return new SecuredSpittleService();
-  }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .inMemoryAuthentication()
+                .withUser("user").password("password").roles("USER");
+    }
+
+    @Bean
+    public SpittleService spitterService() {
+        return new SecuredSpittleService();
+    }
 
 }

@@ -13,74 +13,75 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Spitter {
-  
-  private Spitter() {}
 
-  @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private Long id;
+    private Spitter() {
+    }
 
-  @Column(name="username")
-  private String username;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name="password")
-  private String password;
+    @Column(name = "username")
+    private String username;
 
-  @Column(name="fullname")
-  private String fullName;
+    @Column(name = "password")
+    private String password;
 
-  @Column(name="email")
-  private String email;
+    @Column(name = "fullname")
+    private String fullName;
 
-  @Column(name="updateByEmail")
-  private boolean updateByEmail;
-  
-  @Column(name="status")
-  private String status;
-  
-  @OneToMany(targetEntity=Spittle.class, fetch=FetchType.EAGER, mappedBy="spitter")
-  private List<Spittle> spittles;
+    @Column(name = "email")
+    private String email;
 
-  public Spitter(Long id, String username, String password, String fullName,
-      String email, boolean updateByEmail) {
-    this.id = id;
-    this.username = username;
-    this.password = password;
-    this.fullName = fullName;
-    this.email = email;
-    this.updateByEmail = updateByEmail;
-    this.status = "Newbie";
-  }
+    @Column(name = "updateByEmail")
+    private boolean updateByEmail;
 
-  public Long getId() {
-    return id;
-  }
+    @Column(name = "status")
+    private String status;
 
-  public String getUsername() {
-    return username;
-  }
+    @OneToMany(targetEntity = Spittle.class, fetch = FetchType.EAGER, mappedBy = "spitter")
+    private List<Spittle> spittles;
 
-  public String getPassword() {
-    return password;
-  }
+    public Spitter(Long id, String username, String password, String fullName,
+                   String email, boolean updateByEmail) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.email = email;
+        this.updateByEmail = updateByEmail;
+        this.status = "Newbie";
+    }
 
-  public String getFullName() {
-    return fullName;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public String getUsername() {
+        return username;
+    }
 
-  public boolean isUpdateByEmail() {
-    return updateByEmail;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public String getStatus() {
-    return status;
-  }
-  
-  public List<Spittle> getSpittles() {
-    return spittles;
-  }
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isUpdateByEmail() {
+        return updateByEmail;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public List<Spittle> getSpittles() {
+        return spittles;
+    }
 }

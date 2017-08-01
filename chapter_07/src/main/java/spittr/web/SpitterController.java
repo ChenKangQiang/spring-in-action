@@ -22,19 +22,19 @@ import spittr.data.SpitterRepository;
 @RequestMapping("/spitter")
 public class SpitterController {
 
-  private SpitterRepository spitterRepository;
+    private SpitterRepository spitterRepository;
 
-  @Autowired
-  public SpitterController(SpitterRepository spitterRepository) {
-    this.spitterRepository = spitterRepository;
-  }
-  
-  @RequestMapping(value="/register", method=GET)
-  public String showRegistrationForm(Model model) {
-    model.addAttribute(new Spitter());
-    return "registerForm";
-  }
-  
+    @Autowired
+    public SpitterController(SpitterRepository spitterRepository) {
+        this.spitterRepository = spitterRepository;
+    }
+
+    @RequestMapping(value = "/register", method = GET)
+    public String showRegistrationForm(Model model) {
+        model.addAttribute(new Spitter());
+        return "registerForm";
+    }
+
 //  @RequestMapping(value="/register", method=POST)
 //  public String processRegistration(
 //      @RequestPart(value="profilePictures", required=false) Part fileBytes,
@@ -50,30 +50,30 @@ public class SpitterController {
 //    redirectAttributes.addFlashAttribute(spitter);
 //    return "redirect:/spitter/" + spitter.getUsername();
 //  }
-  
-  @RequestMapping(value="/register", method=POST)
-  public String processRegistration(
-      @Valid SpitterForm spitterForm,
-      Errors errors) throws IllegalStateException, IOException {
-    
-    if (errors.hasErrors()) {
-      return "registerForm";
+
+    @RequestMapping(value = "/register", method = POST)
+    public String processRegistration(
+            @Valid SpitterForm spitterForm,
+            Errors errors) throws IllegalStateException, IOException {
+
+        if (errors.hasErrors()) {
+            return "registerForm";
+        }
+        Spitter spitter = spitterForm.toSpitter();
+        spitterRepository.save(spitter);
+        MultipartFile profilePicture = spitterForm.getProfilePicture();
+        profilePicture.transferTo(new File("/tmp/spittr/" + spitter.getUsername() + ".jpg"));
+        return "redirect:/spitter/" + spitter.getUsername();
     }
-    Spitter spitter = spitterForm.toSpitter();
-    spitterRepository.save(spitter);
-    MultipartFile profilePicture = spitterForm.getProfilePicture();
-    profilePicture.transferTo(new File("/tmp/spittr/" + spitter.getUsername() + ".jpg"));
-    return "redirect:/spitter/" + spitter.getUsername();
-  }
-  
-  @RequestMapping(value="/{username}", method=GET)
-  public String showSpitterProfile(
-          @PathVariable String username, Model model) {
-    if (!model.containsAttribute("spitter")) {
-      model.addAttribute(
-          spitterRepository.findByUsername(username));
+
+    @RequestMapping(value = "/{username}", method = GET)
+    public String showSpitterProfile(
+            @PathVariable String username, Model model) {
+        if (!model.containsAttribute("spitter")) {
+            model.addAttribute(
+                    spitterRepository.findByUsername(username));
+        }
+        return "profile";
     }
-    return "profile";
-  }
-  
+
 }

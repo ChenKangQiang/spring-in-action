@@ -10,29 +10,30 @@ import spittr.domain.Spittle;
 
 /**
  * Repository interface with operations for {@link Spittle} persistence.
+ *
  * @author habuma
  */
 public interface SpittleRepository {
 
-  long count();
-  
-  @Cacheable("spittleCache")
-  List<Spittle> findRecent();
+    long count();
 
-  List<Spittle> findRecent(int count);
+    @Cacheable("spittleCache")
+    List<Spittle> findRecent();
 
-  @Cacheable("spittleCache")
-  Spittle findOne(long id);
-  
-  // 缓存的ID设置为 返回值的id属性
-  @CachePut(value="spittleCache", key="#result.id")
-  Spittle save(Spittle spittle);
-    
-  @Cacheable("spittleCache")
-  List<Spittle> findBySpitterId(long spitterId);
-  
-  // 从缓存中移除
-  @CacheEvict(value="spittleCache",condition="")
-  void delete(long id);
-    
+    List<Spittle> findRecent(int count);
+
+    @Cacheable("spittleCache")
+    Spittle findOne(long id);
+
+    // 缓存的ID设置为 返回值的id属性
+    @CachePut(value = "spittleCache", key = "#result.id")
+    Spittle save(Spittle spittle);
+
+    @Cacheable("spittleCache")
+    List<Spittle> findBySpitterId(long spitterId);
+
+    // 从缓存中移除
+    @CacheEvict(value = "spittleCache", condition = "")
+    void delete(long id);
+
 }

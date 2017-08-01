@@ -8,10 +8,11 @@ import spittr.domain.Spittle;
 
 /**
  * Repository interface with operations for {@link Spittle} persistence.
+ *
  * @author habuma
  */
 public interface SpittleRepository extends JpaRepository<Spittle, Long>, SpittleRepositoryCustom {
-  
-  List<Spittle> findBySpitterId(long spitterId);
-  
+
+    List<Spittle> findBySpitterId(long spitterId);
+
 }

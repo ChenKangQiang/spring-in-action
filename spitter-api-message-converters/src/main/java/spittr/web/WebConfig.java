@@ -14,17 +14,17 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan({"spittr.web", "spittr.api"})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-  @Bean
-  public ViewResolver viewResolver() {
-    InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-    resolver.setPrefix("/WEB-INF/views/");
-    resolver.setSuffix(".jsp");
-    return resolver;
-  }
-  
-  @Override
-  public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-    configurer.enable();
-  }
-  
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".jsp");
+        return resolver;
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
+
 }

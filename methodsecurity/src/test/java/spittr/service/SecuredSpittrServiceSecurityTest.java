@@ -23,50 +23,50 @@ import spittr.domain.Spitter;
 import spittr.domain.Spittle;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes=SecuredConfig.class)
+@ContextConfiguration(classes = SecuredConfig.class)
 public class SecuredSpittrServiceSecurityTest {
 
-  @Autowired
-  private SpittleService spittleService;
+    @Autowired
+    private SpittleService spittleService;
 
-  @Before
-  public void clearContext() {
-    SecurityContextHolder.clearContext();
-  }
-  
-  @Test(expected=AuthenticationCredentialsNotFoundException.class)
-  public void testSecuredMethod_noCredentials() {
-    Spitter spitter = new Spitter(1L, "habuma", null, "Craig Walls", "craig@habuma.com", true);
-    Spittle spittle = new Spittle(1L, spitter, "", new Date());
-    spittleService.addSpittle(spittle);
-  }
-
-  @Test(expected=AccessDeniedException.class)
-  public void testSecuredMethod_insufficentPrivilege() {
-    setupUser();
-    
-    Spitter spitter = new Spitter(1L, "habuma", null, "Craig Walls", "craig@habuma.com", true);
-    Spittle spittle = new Spittle(1L, spitter, "", new Date());
-    spittleService.addSpittle(spittle);
-  }
-
-  @Test
-  public void testSecuredMethod_withSufficientPrivilege() {
-    setupUser("ROLE_SPITTER");
-    
-    Spitter spitter = new Spitter(1L, "habuma", null, "Craig Walls", "craig@habuma.com", true);
-    Spittle spittle = new Spittle(1L, spitter, "", new Date());
-    spittleService.addSpittle(spittle);
-  }
-
-  private void setupUser(String... privs) {
-    SecurityContext securityContext = SecurityContextHolder.getContext();
-    List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-    for (String priv : privs) {
-      authorities.add(new SimpleGrantedAuthority(priv));
+    @Before
+    public void clearContext() {
+        SecurityContextHolder.clearContext();
     }
-    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken("user", "password", authorities);
-    securityContext.setAuthentication(authenticationToken);
-  }
+
+    @Test(expected = AuthenticationCredentialsNotFoundException.class)
+    public void testSecuredMethod_noCredentials() {
+        Spitter spitter = new Spitter(1L, "habuma", null, "Craig Walls", "craig@habuma.com", true);
+        Spittle spittle = new Spittle(1L, spitter, "", new Date());
+        spittleService.addSpittle(spittle);
+    }
+
+    @Test(expected = AccessDeniedException.class)
+    public void testSecuredMethod_insufficentPrivilege() {
+        setupUser();
+
+        Spitter spitter = new Spitter(1L, "habuma", null, "Craig Walls", "craig@habuma.com", true);
+        Spittle spittle = new Spittle(1L, spitter, "", new Date());
+        spittleService.addSpittle(spittle);
+    }
+
+    @Test
+    public void testSecuredMethod_withSufficientPrivilege() {
+        setupUser("ROLE_SPITTER");
+
+        Spitter spitter = new Spitter(1L, "habuma", null, "Craig Walls", "craig@habuma.com", true);
+        Spittle spittle = new Spittle(1L, spitter, "", new Date());
+        spittleService.addSpittle(spittle);
+    }
+
+    private void setupUser(String... privs) {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        for (String priv : privs) {
+            authorities.add(new SimpleGrantedAuthority(priv));
+        }
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken("user", "password", authorities);
+        securityContext.setAuthentication(authenticationToken);
+    }
 
 }

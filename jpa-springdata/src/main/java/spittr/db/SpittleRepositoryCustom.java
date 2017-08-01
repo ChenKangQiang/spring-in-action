@@ -6,8 +6,8 @@ import spittr.domain.Spittle;
 
 public interface SpittleRepositoryCustom {
 
-  List<Spittle> findRecent();
+    List<Spittle> findRecent();
 
-  List<Spittle> findRecent(int count);
+    List<Spittle> findRecent(int count);
 
 }
