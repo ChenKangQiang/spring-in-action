@@ -16,11 +16,11 @@ import spittr.db.jdbc.JdbcSpitterRepository;
 import spittr.domain.Spitter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes=JdbcConfig.class)
+@ContextConfiguration(locations = {"classpath:spittr/db/jdbc/JdbcRepositoryTests-context.xml"})
 public class JdbcSpitterRepositoryTest {
 
   @Autowired
-  JdbcSpitterRepository spitterRepository;
+  private JdbcSpitterRepository spitterRepository;
 
   @Test
   public void count() {
@@ -60,8 +60,14 @@ public class JdbcSpitterRepositoryTest {
   @Transactional
   public void save_newSpitter() {
     assertEquals(4, spitterRepository.count());
-    Spitter spitter = new Spitter(null, "newbee", "letmein", "New Bee",
-        "newbee@habuma.com", true);
+
+    Spitter spitter = new Spitter();
+    spitter.setUsername("newbee");
+    spitter.setPassword("letmein");
+    spitter.setFullName("New Bee");
+    spitter.setEmail("newbee@habuma.com");
+    spitter.setUpdateByEmail(true);
+
     Spitter saved = spitterRepository.save(spitter);
     assertEquals(5, spitterRepository.count());
     assertSpitter(4, saved);

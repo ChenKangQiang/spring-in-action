@@ -17,8 +17,8 @@ import spittr.domain.Spitter;
 import spittr.domain.Spittle;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations={"classpath:spittr/db/jdbc/JdbcRepositoryTests-context.xml"})
-@ContextConfiguration(classes=JdbcConfig.class)
+@ContextConfiguration(locations={"classpath:spittr/db/jdbc/JdbcRepositoryTests-context.xml"})
+//@ContextConfiguration(classes=JdbcConfig.class)
 public class JdbcSpittleRepositoryTest {
 
   @Autowired
