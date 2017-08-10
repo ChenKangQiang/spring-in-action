@@ -1,10 +1,11 @@
-package spittr.alerts;
+package spittr.alerts.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsOperations;
 
 import org.springframework.stereotype.Service;
+import spittr.alerts.api.AlertService;
 import spittr.domain.Spittle;
 
 /**

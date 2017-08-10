@@ -1,4 +1,4 @@
-package spittr.alerts;
+package spittr.alerts.api;
 
 import spittr.domain.Spittle;
 
