@@ -12,5 +12,4 @@ public class Spittle implements Serializable {
     private final Spitter spitter;
     private final String message;
     private final Date postedTime;
-
 }

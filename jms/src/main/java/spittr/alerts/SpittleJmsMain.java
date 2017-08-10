@@ -13,7 +13,13 @@ public class SpittleJmsMain {
         AlertService alertService = context.getBean(AlertService.class);
 
         Spittle spittle = new Spittle(1L, null, "Hello", new Date());
+
+        //发送消息给代理
         alertService.sendSpittleAlert(spittle);
+
+        while (true) {
+            System.out.println(alertService.retrieveSpittleAlert());
+        }
 
     }
 

@@ -53,21 +53,25 @@
     <amq:topic id="spittleTopic" physicalName="spittle.alert.topic"/>
 
     <!-- 配置ActiveMQ的连接工厂 -->
-    <amq:connectionFactory id="connectionFactory" brokerURL="tcp://localhost:61616"/>
+    <amq:connectionFactory id="connectionFactory" brokerURL="tcp://localhost:61616" trustAllPackages="true"/>
 
     <!-- 配置JMS模板，JMS模板需使用连接工厂 -->
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
-        <property name="defaultDestination" value="spittle.alert.queue"/>
+        <property name="defaultDestination" ref="spittleQueue"/>
+        <!--<property name="messageConverter" ref="messageConverter"/>-->
     </bean>
 
-    <!-- 配置消息监听容器，监控JMS目的地，并把消息传给任意一个对此感兴趣的消息监听者 -->
-    <jms:listener-container>
-        <jms:listener destination="spittle.alert.queue"
-                      ref="spittleHandler"
-                      method="handleSpittleAlert"/>
-    </jms:listener-container>
+    <!--jmsTemplate所使用消息转换器-->
+    <!--<bean id="messageConverter" class="org.springframework.jms.support.converter.MappingJackson2MessageConverter"/>-->
 
-    <bean id="spittleHandler" class="spittr.alerts.SpittleAlertHandler"/>
+    <!-- 配置消息监听容器，监控JMS目的地，并把消息传给任意一个对此感兴趣的消息监听者 -->
+    <!--<jms:listener-container>-->
+        <!--<jms:listener destination="spittle.alert.queue"-->
+                      <!--ref="spittleHandler"-->
+                      <!--method="handleSpittleAlert"/>-->
+    <!--</jms:listener-container>-->
+
+    <!--<bean id="spittleHandler" class="spittr.alerts.SpittleAlertHandler"/>-->
 
 </beans>

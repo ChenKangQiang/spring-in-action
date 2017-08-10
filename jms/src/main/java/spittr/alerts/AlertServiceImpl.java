@@ -1,6 +1,7 @@
 package spittr.alerts;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsOperations;
 
 import org.springframework.stereotype.Service;
@@ -17,11 +18,8 @@ import spittr.domain.Spittle;
 public class AlertServiceImpl implements AlertService {
 
     @Autowired
+    @Qualifier("jmsTemplate")
     private JmsOperations jmsOperations;
-
-    public AlertServiceImpl(JmsOperations jmsOperations) {
-        this.jmsOperations = jmsOperations;
-    }
 
 //  public void sendSpittleAlert(final Spittle spittle) {
 //    jmsOperations.send(
@@ -50,6 +48,7 @@ public class AlertServiceImpl implements AlertService {
 
     @Override
     public void sendSpittleAlert(Spittle spittle) {
+
         jmsOperations.convertAndSend(spittle);
     }
 
@@ -64,6 +63,7 @@ public class AlertServiceImpl implements AlertService {
 
     @Override
     public Spittle retrieveSpittleAlert() {
+
         return (Spittle) jmsOperations.receiveAndConvert();
     }
 
