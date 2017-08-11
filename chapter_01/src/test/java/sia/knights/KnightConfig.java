@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import sia.knights.api.Knight;
 import sia.knights.api.Quest;
 
-import java.io.PrintStream;
 
 @Configuration
 public class KnightConfig {
@@ -19,6 +18,6 @@ public class KnightConfig {
     public Quest quest() { return new SlayDragonQuest(stream()); }
 
     @Bean
-    public PrintStream stream() { return new FakePrintStream(); }
+    public FakePrintStream stream() { return new FakePrintStream(); }
 
 }

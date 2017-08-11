@@ -15,14 +15,14 @@ import static org.junit.Assert.assertEquals;
 public class KnightXMLInjectionTest {
 
     @Autowired
-    Knight knight;
+    private Knight knight;
 
     @Autowired
-    FakePrintStream printStream;
+    private FakePrintStream fakePrintStream;
 
     @After
     public void clearPrintStream() {
-        printStream.clear();
+        fakePrintStream.clear();
     }
 
     @Test
@@ -32,7 +32,7 @@ public class KnightXMLInjectionTest {
                 "Fa la la, the knight is so brave!\n" +
                         "Embarking on quest to slay the dragon!\n" +
                         "Tee hee hee, the brave knight did embark on a quest!\n",
-                printStream.getPrintedString());
+                fakePrintStream.getPrintedString());
     }
 
 }

@@ -9,8 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import sia.knights.api.Knight;
 
-import java.io.PrintStream;
-
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = KnightConfig.class, loader = AnnotationConfigContextLoader.class)
@@ -20,19 +19,18 @@ public class KnightJavaConfigInjectionTest {
     private Knight knight;
 
     @Autowired
-    private PrintStream printStream;
+    private FakePrintStream fakePrintStream;
 
     @After
     public void clearPrintStream() {
-        printStream.clear();
+
+        fakePrintStream.clear();
     }
 
     @Test
     public void shouldInjectKnightWithSlayDragonQuest() {
         knight.embarkOnQuest();
-        assertEquals(
-                "Embarking on quest to slay the dragon!\n",
-                printStream.getPrintedString());
+        assertEquals("Embarking on quest to slay the dragon!\n", fakePrintStream.getPrintedString());
     }
 
 }

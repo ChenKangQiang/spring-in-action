@@ -6,7 +6,7 @@ import orders.Order;
 
 import org.springframework.data.neo4j.repository.GraphRepository;
 
-public interface OrderRepository extends GraphRepository<Order> {
+public interface OrderRepository {
 
     List<Order> findByCustomer(String customer);
 
