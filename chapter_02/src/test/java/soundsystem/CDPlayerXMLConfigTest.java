@@ -9,9 +9,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import soundsystem.api.CompactDisc;
+import soundsystem.api.MediaPlayer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:META-INF/spring/soundsystem.xml")
+@ContextConfiguration(locations = "classpath:spring/soundsystem.xml")
 public class CDPlayerXMLConfigTest {
 
     @Rule
