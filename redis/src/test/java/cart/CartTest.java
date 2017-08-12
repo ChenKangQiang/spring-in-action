@@ -19,7 +19,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = RedisConfig.class)
+//@ContextConfiguration(classes = RedisConfig.class)
+@ContextConfiguration(locations = {"classpath:spring-redis.xml"})
 public class CartTest {
 
 	/*
