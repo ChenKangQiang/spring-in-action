@@ -10,8 +10,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>chapter_01</module>
-        <module>chapter_02</module>
-        <module>chapter_03</module>
         <module>chapter_05</module>
         <module>chapter_19</module>
         <module>amqp</module>
@@ -44,6 +42,7 @@
         <module>stereo-mixedconfig</module>
         <module>stereo-xmlconfig</module>
         <module>stereo-autoconfig</module>
+        <module>RMI</module>
     </modules>
 
     <properties>

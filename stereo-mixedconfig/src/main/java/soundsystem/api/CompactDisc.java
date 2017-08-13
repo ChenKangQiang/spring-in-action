@@ -1,4 +1,4 @@
-package soundsystem;
+package soundsystem.api;
 
 public interface CompactDisc {
 
