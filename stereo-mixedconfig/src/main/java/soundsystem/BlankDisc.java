@@ -1,5 +1,7 @@
 package soundsystem;
 
+import soundsystem.api.CompactDisc;
+
 import java.util.List;
 
 public class BlankDisc implements CompactDisc {

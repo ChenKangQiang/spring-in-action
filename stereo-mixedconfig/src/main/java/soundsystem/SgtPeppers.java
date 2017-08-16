@@ -1,6 +1,8 @@
 package soundsystem;
 
 
+import soundsystem.api.CompactDisc;
+
 public class SgtPeppers implements CompactDisc {
 
     private String title = "Sgt. Pepper's Lonely Hearts Club Band";

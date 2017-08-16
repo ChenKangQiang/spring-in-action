@@ -2,6 +2,8 @@ package soundsystem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import soundsystem.api.CompactDisc;
+import soundsystem.api.MediaPlayer;
 
 @Component
 public class CDPlayer implements MediaPlayer {
@@ -12,8 +14,8 @@ public class CDPlayer implements MediaPlayer {
         this.cd = cd;
     }
 
-    public void play() {
-        cd.play();
+    public String play() {
+        return cd.play();
     }
 
 }
